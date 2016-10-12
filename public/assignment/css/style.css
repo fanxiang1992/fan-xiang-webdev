@@ -3,5 +3,88 @@ input.form-control {
 }
 
 body {
-    padding-top: 36px;
+    padding-top: 60px;
 }
+
+.navbar-plus {
+	font-size: 24px;
+	font-weight: bold;
+}
+.navbar-ok {
+	font-size: 20px;
+	top: 8px;
+}
+
+.navbar-default, .navbar-blue {
+	border-radius: 0;
+}
+
+.navbar-blue {
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+
+.white-text {
+	color: white;
+}
+
+.navbar-default .navbar-white-text {
+	color: white;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 12px 0;
+}
+
+.navbar-white .navbar-white-text {
+	color: #777;
+}
+
+.navbar-white .glyphicon-user {
+	color: #337ab7;
+}
+
+.glyphicon-chevron-left {
+	font-size: 20px;
+}
+
+.right-navbar-link {
+	position: absolute;
+	right: 0px;
+	top: 6px;
+}
+
+.content-list {
+	margin-top: 20px;
+}
+.content-list > li {
+	list-style: none;
+	padding: 10px 0px;
+	font-size: 16px;
+}
+
+.website-new {
+	padding: 0;
+	margin-top: -60px;
+}
+
+.website-new > .col-sm-4 {
+	border-right: 1px solid gray;
+}
+
+.website-new > .col-sm-4, .website-new > .col-sm-8 {
+	height: 100vh;
+	padding: 0;
+}
+
+.header1 {
+	font-size: 40px;
+}
+
+.header2 {
+	font-size: 15px;
+	color: black;
+}
+ .widget-list {
+ 	list-style: none;
+ 	top: 0px;
+ }
