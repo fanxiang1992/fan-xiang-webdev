@@ -4,41 +4,46 @@
 			<nav class="navbar navbar-default navbar-blue">
 				<div class="container-fluid col-xs-12">
 					<div class="navbar-white-text col-xs-11"> Websites
-						<a class="navbar-link pull-right right-navbar-link" href="#/user/:uid/website/new">
+						<a class="navbar-link pull-right right-navbar-link" href="#/user/{{model.userId}}/website/new">
 							<span class="gglyphicon glyphicon-plus navbar-plus white-text" aria-hidden="true"></span>
 						</a>
 					</div>
 				</div>
 			</nav>
 			<ul class="content-list col-xs-12">
-				<li class="row"><a href="#/user/:uid/website/:wid/page" class="col-xs-10">Address Book App</a><a href="#/user/:uid/website/:wid" class="text-right col-xs-2"><span class="glyphicon glyphicon-cog"></span></a></li>
-				<li class="row"><a href="#/user/:uid/website/:wid/page" class="col-xs-10">Blogger</a><a href="#/user/:uid/website/:wid" class="text-right col-xs-2"><span class="glyphicon glyphicon-cog "></span></a></li>
-				<li class="row"><a href="#/user/:uid/website/:wid/page" class="col-xs-10">Blogging App</a><a href="#/user/:uid/website/:wid" class="text-right col-xs-2"><span class="glyphicon glyphicon-cog"></span></a></li>
-				<li class="row"><a href="#/user/:uid/website/:wid/page" class="col-xs-10">Script Testing App</a><a href="#/user/:uid/website/:wid" class="text-right col-xs-2"><span class="glyphicon glyphicon-cog"></span></a></li>
+        <li class="row" ng-repeat="website in model.websites">
+          <a href="#/user/{{model.userId}}/website/{{website._id}}/page" class="col-xs-10">{{website.name}}</a>
+          <a href="#/user/{{model.userId}}/website/{{website._id}}" class="text-right col-xs-2">
+            <span class="glyphicon glyphicon-cog"></span>
+          </a>
+        </li>
 			</ul>
 		</div>
 		<div class="col-sm-8 col-xs-12">
 			<nav class="navbar navbar-default navbar-blue">
 				<div class="container-fluid col-xs-12">
-					<a class="navbar-brand col-xs-1" href="website-list.html">
+					<a class="navbar-brand col-xs-1" href="#/user/{{model.userId}}/website">
 						<span class="glyphicon glyphicon-chevron-left white-text" aria-hidden="true"></span>
 					</a>
 					<div class="navbar-white-text col-xs-11"> New Website
-						<a class="navbar-link pull-right right-navbar-link" href="#/user/:uid/website">
+						<a class="navbar-link pull-right right-navbar-link" ng-click="model.createWebsite(model.website)" href="">
 							<span class="glyphicon glyphicon-ok navbar-ok white-text" aria-hidden="true"></span>
 						</a>
 					</div>
 				</div>
 			</nav>
 			<div class="contianer col-xs-12">
+        <div ng-show="model.error" class="alert alert-danger" role="alert">
+          {{model.error}}
+        </div>
 				<form>
 				<div class="form-group">
 					<label for="username">Name</label>
-					<input type="text" class="form-control" id="name" placeholder="Name">
+					<input ng-model="model.website.name" type="text" class="form-control" id="name" placeholder="Name">
 				</div>
 				<div class="form-group">
 					<label for="description">Description</label>
-					<textarea rows="4" cols="10" class="form-control" id="description" placeholder="Description"></textarea>
+					<textarea ng-model="model.website.description" rows="4" cols="10" class="form-control" id="description" placeholder="Description"></textarea>
 				</div>
 			</form>
 			</div>
@@ -46,10 +51,10 @@
 
 		</div>
 	</div>
-<nav class="navbar navbar-default navbar-fixed-bottom">
+<nav class="navbar navbar-default navbar-blue navbar-fixed-bottom">
 		<div class="container-fluid">
 			<ul class="nav navbar-nav navbar-right pull-right">
-				<li><a class="navbar-link" href="#/user/:uid">
+				<li><a class="navbar-link" href="#/user/{{model.userId}}">
 				<span class="glyphicon glyphicon-user white-text" aria-hidden="true"></span>
 				</a></li>
 			</ul>

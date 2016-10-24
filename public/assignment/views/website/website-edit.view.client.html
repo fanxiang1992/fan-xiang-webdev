@@ -1,60 +1,63 @@
 
-	<div class="container-fluid website-new">
-		<div class="col-sm-4 hidden-xs">
-			<nav class="navbar navbar-default navbar-blue">
-				<div class="container-fluid col-xs-12">
-					<div class="navbar-white-text col-xs-11"> Websites
-						<a class="navbar-link pull-right right-navbar-link" href="#/user/:uid/website/new">
-							<span class="gglyphicon glyphicon-plus navbar-plus white-text" aria-hidden="true"></span>
-						</a>
-					</div>
-				</div>
-			</nav>
-			<ul class="content-list col-xs-12">
-				<li class="row"><a href="#/user/:uid/website/:wid/page" class="col-xs-10">Address Book App</a><a href="#/user/:uid/website/:wid" class="text-right col-xs-2"><span class="glyphicon glyphicon-cog"></span></a></li>
-				<li class="row"><a href="#/user/:uid/website/:wid/page" class="col-xs-10">Blogger</a><a href="#/user/:uid/website/:wid" class="text-right col-xs-2"><span class="glyphicon glyphicon-cog "></span></a></li>
-				<li class="row"><a href="#/user/:uid/website/:wid/page" class="col-xs-10">Blogging App</a><a href="#/user/:uid/website/:wid" class="text-right col-xs-2"><span class="glyphicon glyphicon-cog"></span></a></li>
-				<li class="row"><a href="#/user/:uid/website/:wid/page" class="col-xs-10">Script Testing App</a><a href="#/user/:uid/website/:wid" class="text-right col-xs-2"><span class="glyphicon glyphicon-cog"></span></a></li>
-			</ul>
-		</div>
-		<div class="col-sm-8 col-xs-12">
-			<nav class="navbar navbar-default navbar-blue">
-				<div class="container-fluid col-xs-12">
-					<a class="navbar-brand col-xs-1" href="#/user/:uid/website">
-						<span class="glyphicon glyphicon-chevron-left white-text" aria-hidden="true"></span>
-					</a>
-					<div class="navbar-white-text col-xs-11"> Edit Website
-						<a class="navbar-link pull-right right-navbar-link" href="#/user/:uid/website">
-							<span class="glyphicon glyphicon-ok navbar-ok white-text" aria-hidden="true"></span>
-						</a>
-					</div>
-				</div>
-			</nav>
-			<div class="contianer col-xs-12">
-				<form>
-				<div class="form-group">
-					<label for="websitename">Website Name</label>
-					<input type="text" class="form-control" id="name" placeholder="Website Name">
-				</div>
-				<div class="form-group">
-					<label for="website-description">Website Description</label>
-					<textarea rows="4" cols="10" class="form-control" id="webdescription" placeholder="Website Description"></textarea>
-				</div>
-			</form>
-			<a class="btn btn-danger  btn-block"
-           href="#/user/:uid/website">Delete</a>
-			</div>
-			
-			
+<div class="container-fluid website-new">
+  <div class="col-sm-4 hidden-xs">
+    <nav class="navbar navbar-default navbar-blue">
+      <div class="container-fluid col-xs-12">
+        <div class="navbar-white-text col-xs-11"> Websites
+          <a class="navbar-link pull-right right-navbar-link" href="#/user/{{model.userId}}/website/new">
+            <span class="gglyphicon glyphicon-plus navbar-plus white-text" aria-hidden="true"></span>
+          </a>
+        </div>
+      </div>
+    </nav>
 
-		</div>
-	</div>
+    <ul class="content-list col-xs-12">
+      <li ng-repeat="website in model.websites" class="row">
+        <a href="#/user/{{model.userId}}/website/{{website._id}}/page" class="col-xs-10">{{website.name}}</a>
+        <a href="#/user/{{model.userId}}/website/{{website._id}}" class="text-right col-xs-2">
+          <span class="glyphicon glyphicon-cog"></span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-sm-8 col-xs-12">
+    <nav class="navbar navbar-default navbar-blue">
+      <div class="container-fluid col-xs-12">
+        <a class="navbar-brand col-xs-1" href="#/user/{{model.userId}}/website">
+          <span class="glyphicon glyphicon-chevron-left white-text" aria-hidden="true"></span>
+        </a>
+        <div class="navbar-white-text col-xs-11"> Edit Website
+          <a class="navbar-link pull-right right-navbar-link" ng-click="model.updateWebsite(model.website)" href="">
+            <span class="glyphicon glyphicon-ok navbar-ok white-text" aria-hidden="true"></span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="contianer col-xs-12">
+      <div ng-show="model.error" class="alert alert-danger" role="alert">{{model.error}}</div>
+      <form>
+        <div class="form-group">
+          <label for="websitename">Website Name</label>
+          <input ng-model="model.website.name" type="text" class="form-control" id="name" placeholder="Website Name">
+        </div>
+        <div class="form-group">
+          <label for="website-description">Website Description</label>
+          <textarea ng-model="model.website.description" rows="4" cols="10" class="form-control" id="webdescription" placeholder="Website Description"></textarea>
+        </div>
+      </form>
+      <a class="btn btn-danger btn-block" ng-click="model.deleteWebsite()">Delete</a>
+    </div>
+  </div>
+</div>
+
 <nav class="navbar navbar-default navbar-blue navbar-fixed-bottom">
-		<div class="container-fluid">
-			<ul class="nav navbar-nav navbar-right pull-right">
-				<li><a class="navbar-link" href="#/user/:uid">
-				<span class="glyphicon glyphicon-user white-text" aria-hidden="true"></span>
-				</a></li>
-			</ul>
-		</div>
-	</nav>
+  <div class="container-fluid">
+    <ul class="nav navbar-nav navbar-right pull-right">
+      <li><a class="navbar-link" href="#/user/{{model.userId}}">
+        <span class="glyphicon glyphicon-user white-text" aria-hidden="true"></span></a>
+      </li>
+    </ul>
+  </div>
+</nav>

@@ -1,33 +1,39 @@
 
 <nav class="navbar navbar-default navbar-blue navbar-fixed-top">
-    <div class="container-fluid col-xs-12">
-        <a class="navbar-brand col-xs-1" href="#/user/:uid">
-            <span class="glyphicon glyphicon-chevron-left white-text" aria-hidden="true"></span>
-        </a>
-        <div class="navbar-white-text col-xs-11"> Websites
-	   	 	<a class="navbar-link pull-right right-navbar-link" href="#/user/:uid/website/new">
-				<span class="gglyphicon glyphicon-plus navbar-plus white-text" aria-hidden="true"></span>
-			</a>
-        </div>
+  <div class="container-fluid col-xs-12">
+    <a class="navbar-brand col-xs-1" ng-href="#/user/{{model.userId}}">
+      <span class="glyphicon glyphicon-chevron-left white-text" aria-hidden="true"></span>
+    </a>
+    <div class="navbar-white-text col-xs-11"> Websites
+      <a class="navbar-link pull-right right-navbar-link" ng-href="#/user/{{model.userId}}/website/new">
+        <span class="gglyphicon glyphicon-plus navbar-plus white-text" aria-hidden="true"></span>
+      </a>
     </div>
+  </div>
 </nav>
 
 <ul class="content-list container">
-	<li class="row"><a href="#/user/:uid/website/:wid/page" class="col-xs-11">Address Book App</a><a href="#/user/:uid/website/:wid" class="text-right col-xs-1"><span class="glyphicon glyphicon-cog"></span></a></li>
-	<li class="row"><a href="#/user/:uid/website/:wid/page" class="col-xs-11">Blogger</a><a href="#/user/:uid/website/:wid" class="text-right col-xs-1"><span class="glyphicon glyphicon-cog "></span></a></li>
-	<li class="row"><a href="#/user/:uid/website/:wid/page" class="col-xs-11">Blogging App</a><a href="#/user/:uid/website/:wid" class="text-right col-xs-1"><span class="glyphicon glyphicon-cog"></span></a></li>
-	<li class="row"><a href="#/user/:uid/website/:wid/page" class="col-xs-11">Script Testing App</a><a href="#/user/:uid/website/:wid" class="text-right col-xs-1"><span class="glyphicon glyphicon-cog"></span></a></li>
+  <li ng-repeat="website in model.websites" class="row">
+    <a href="#/user/{{model.userId}}/website/{{website._id}}/page" class="col-xs-11">
+      {{website.name}}
+    </a>
+    <a href="#/user/{{model.userId}}/website/{{website._id}}" class="text-right col-xs-1">
+      <span class="glyphicon glyphicon-cog"></span>
+    </a>
+  </li>
 </ul>
 
-	<nav class="navbar navbar-default navbar-blue navbar-fixed-bottom">
-		<div class="container-fluid">
-			<ul class="nav navbar-nav navbar-right pull-right">
-				<li><a class="navbar-link" href="#/user/:uid">
-				<span class="glyphicon glyphicon-user white-text" aria-hidden="true"></span>
-				</a></li>
-			</ul>
-		</div>
-	</nav>
+<nav class="navbar navbar-default navbar-blue navbar-fixed-bottom">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav navbar-right pull-right">
+      <li>
+        <a class="navbar-link" href="#/user/{{model.userId}}">
+          <span class="glyphicon glyphicon-user white-text" aria-hidden="true"></span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
 
 
 
