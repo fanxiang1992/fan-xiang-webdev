@@ -1,50 +1,12 @@
 
-<nav class="navbar navbar-default navbar-white navbar-fixed-top">
-    <div class="container-fluid col-xs-12">
-        <a class="navbar-brand col-xs-1" href="#/user/:uid/website/:wid/page/:pid/widget">
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        </a>
-        <div class="navbar-white-text col-xs-11"> Widget Edit
-	   	 	<a class="navbar-link pull-right right-navbar-link" href="#/user/:uid/website/:wid/page/:pid/widget">
-				<span class="glyphicon glyphicon-ok navbar-ok" aria-hidden="true"></span>
-			</a>
-        </div>
-    </div>
-</nav>
 
-<div class="container">
-            <form>
-                <div class="form-group">
-                    <label for="pagename">Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="Name">
-                </div>
-                <div class="form-group">
-                    <label for="text">Text</label>
-                    <input type="text" class="form-control" id="webdescription" placeholder="Text">
-                </div>
-                <div class="form-group">
-                    <label for="URL">URL</label>
-                    <input type="text" class="form-control" id="URL" placeholder="URL">
-                </div>
-                <div class="form-group">
-                    <label for="width">Width</label>
-                    <input type="text" class="form-control" id="URL" placeholder="Width">
-                </div>
-            </form>
-            <a class="btn btn-primary btn-block"
-           href="#/user/:uid/website/:wid/page/:pid/widget">Upload Image</a>
-            <a class="btn btn-danger  btn-block"
-           href="#/user/:uid/website/:wid/page/:pid/widget">Delete</a>
-           </div>
+<div class="col-xs-11">
+  <div class="col-xs-8">
+    <img ng-src="{{widget.url}}" class="row" style="width:{{widget.width}}; height:auto;"/>
+  </div>
+</div>
 
-
-
-<nav class="navbar navbar-default navbar-white navbar-fixed-bottom">
-        <div class="container-fluid">
-            <ul class="nav navbar-nav navbar-right pull-right">
-                <li><a class="navbar-link" href="#/user/:uid">
-                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                </a></li>
-            </ul>
-        </div>
-    </nav>
+<a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget/{{widget._id}}" class="text-right">
+  <span class="glyphicon glyphicon-cog text-right"></span>
+  <span class="glyphicon glyphicon-align-justify text-right"></span>
+</a>

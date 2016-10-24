@@ -1,7 +1,7 @@
 
 <nav class="navbar navbar-default navbar-white navbar-fixed-top">
     <div class="container-fluid col-xs-12">
-        <a class="navbar-brand col-xs-1" href="#/user/:uid/website/:wid/page/:pid/widget">
+        <a class="navbar-brand col-xs-1" href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget">
             <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
         </a>
         <div class="navbar-white-text col-xs-11"> Choose Widget
@@ -10,9 +10,9 @@
 </nav>
 
 <ul class="content-list container">
-    <li><a href="widget-heading.html">Header</a></li>
-    <li><a href="widget-image.html">Image</a></li>
-    <li><a href="widget-youtube.html">YouTube</a></li>
+    <li><a href="" ng-click="model.createWidget('HEADING')">Header</a></li>
+    <li><a href="" ng-click="model.createWidget('IMAGE')">Image</a></li>
+    <li><a href="" ng-click="model.createWidget('YOUTUBE')">YouTube</a></li>
     <li><a href="">Label</a></li>
     <li><a href="">Text Input</a></li> 
     <li><a href="">Link</a></li> 
@@ -25,7 +25,7 @@
 <footer class="navbar navbar-default navbar-fixed-bottom footer">
     <div class="container-fluid">
         <div class="navbar-text pull-right">
-            <a href="#/user/:uid">
+            <a href="#/user/{{model.uid}}">
                 <span class="glyphicon glyphicon-user footer-text"></span>
             </a>
         </div>

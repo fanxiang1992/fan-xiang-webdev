@@ -84,7 +84,16 @@ body {
 	font-size: 15px;
 	color: black;
 }
- .widget-list {
- 	list-style: none;
- 	top: 0px;
- }
+
+.widget-list {
+  list-style: none;
+  top: 0px;
+}
+
+.widget-list-wrapper {
+  padding-bottom: 8rem;
+}
+
+.single-widget {
+  padding-bottom: 5rem;
+}

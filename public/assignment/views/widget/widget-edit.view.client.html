@@ -1,0 +1,70 @@
+<nav class="navbar navbar-default navbar-white navbar-fixed-top">
+  <div class="container-fluid col-xs-12">
+  <a class="navbar-brand col-xs-1" href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    </a>
+    <div class="navbar-white-text col-xs-11"> Widget Edit
+      <a class="navbar-link pull-right right-navbar-link" 
+       ng-click="model.updateWidget(model.widget)">
+        <span class="glyphicon glyphicon-ok navbar-ok" aria-hidden="true"></span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <form>
+    <div class="form-group">
+      <label for="pagename">Name</label>
+      <input ng-model="model.widget.name" type="text" class="form-control" id="name" placeholder="Name">
+    </div>
+
+    <div ng-switch="model.widget.widgetType">
+      <div ng-switch-when="HEADING">
+        <div class="form-group">
+          <label for="text">Text</label>
+          <input ng-model="model.widget.text" type="text" class="form-control" id="text" placeholder="Text">
+        </div>
+        <div class="form-group">
+          <label for="size">Size</label>
+          <input ng-model="model.widget.size" type="text" class="form-control" id="size" placeholder="Size">
+        </div>
+      </div>
+      <div ng-switch-when="IMAGE">
+        <div class="form-group">
+          <label for="width">Width</label>
+          <input ng-model="model.widget.width" type="text" class="form-control" id="width" placeholder="Width">
+        </div>
+        <div class="form-group">
+          <label for="url">URL</label>
+          <input ng-model="model.widget.url" type="text" class="form-control" id="url" placeholder="URL">
+        </div>
+      </div>
+      <div ng-switch-when="YOUTUBE">
+        <div class="form-group">
+          <label for="width">Width</label>
+          <input ng-model="model.widget.width" type="text" class="form-control" id="width" placeholder="Width">
+        </div>
+        <div class="form-group">
+          <label for="url">URL</label>
+          <input ng-model="model.widget.url" type="text" class="form-control" id="url" placeholder="URL">
+        </div>
+      </div>
+    </div>
+  </form>
+  <a class="btn btn-danger btn-block"
+  ng-click="model.deleteWidget()">Delete</a>
+</div>
+
+<nav class="navbar navbar-default navbar-white navbar-fixed-bottom">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav navbar-right pull-right">
+      <li><a class="navbar-link" href="#/user/{{model.uid}}">
+        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+      </a></li>
+    </ul>
+  </div>
+</nav>
+
+
+
