@@ -12,7 +12,7 @@
   </div>
 </nav>
 
-<div class="container-fluid widget-list-wrapper">
+<!-- <div class="container-fluid widget-list-wrapper">
   <div class="row">
     <div class="container-fluid single-widget" ng-repeat="widget in model.widgets">
       <div ng-switch="widget.widgetType">
@@ -33,7 +33,8 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
+<wam-sortable sort="model.sortWidget(start, stop)" data="model.widgets"></wam-sortable>
 <footer class="navbar navbar-default navbar-fixed-bottom footer">
   <div class="container-fluid">
     <div class="navbar-text pull-right">

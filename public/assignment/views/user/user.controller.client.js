@@ -12,12 +12,18 @@
         return;
       }
 
-      var user = UserService.findUserByCredentials(user.username, user.password);
-      if(user === null) {
-        vm.error = "No such user";
-      } else {
-        $location.url("/user/" + user._id);
-      }
+      var promise = UserService.findUserByCredentials(user.username, user.password);
+      promise
+      .success(function(user){
+        if(user === '0') {
+          vm.error = "No such user";
+        } else {
+          $location.url("/user/" + user._id);
+        }
+      })
+      .error(function(bbbb){
+        console.log(bbbb);
+      });
     }
   }
 })();
@@ -44,13 +50,18 @@
       }
 
       var user = {
-        _id: (456 + UserService.allUsersCount() - 3).toString(),
         username: user.username,
         password: user.password
       }
 
-      UserService.createUser(user);
-      $location.url("/user/" + user._id);
+      UserService
+      .createUser(user)
+      .success(function(user){
+        $location.url("/user/"+user._id);
+      })
+      .error(function (error) {
+
+      });
     }
   }
 })();
@@ -62,11 +73,35 @@
   function ProfileController($routeParams, UserService) {
     var vm = this;
     vm.userId = parseInt($routeParams.uid);
+    vm.updateUser = updateUser;
+    vm.unregisterUser = unregisterUser;
 
     function init() {
-      vm.user = UserService.findUserById(vm.userId);
+      UserService.findUserById(vm.userId)
+      .success(function(user){
+        if(user != '0') {
+          vm.user = user;
+        }
+      })
+      .error(function(){
+        console.log("findUserById-error");
+      });
+    }
+    init();
+
+    function updateUser() {
+      UserService.updateUser(vm.user);
     }
 
-    init();
+    function unregisterUser() {
+      UserService
+      .unregisterUser(vm.user._id)
+      .success(function(){
+        $location.url("/login");
+      })
+      .error(function(){
+
+      });
+    }
   }
 })();

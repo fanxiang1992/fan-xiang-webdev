@@ -1,0 +1,23 @@
+<div class="container-fluid widget-list-wrapper" ng-controller="WidgetListController as model">
+  <div class="row wamSortable">
+    <div class="container-fluid single-widget" ng-repeat="widget in model.widgets">
+      <div ng-switch="widget.widgetType">
+        <div ng-switch-when="HEADING">
+          <ng-include src="'views/widget/widget-heading.view.client.html'">
+        </div>
+        <div ng-switch-when="IMAGE">
+          <ng-include src="'views/widget/widget-image.view.client.html'">
+        </div>
+        <div ng-switch-when="YOUTUBE">
+          <ng-include src="'views/widget/widget-youtube.view.client.html'">
+        </div>
+        <div ng-switch-when="HTML">
+          <div class="col-xs-12">
+            <div ng-bind-html="model.checkSafeHtml(widget.text)"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

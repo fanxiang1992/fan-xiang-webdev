@@ -8,7 +8,9 @@
     vm.userId = parseInt($routeParams.uid);
 
     function init() {
-      vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
+      PageService.findPageByWebsiteId(vm.websiteId).success(function(pages) {
+        vm.pages = pages;
+      });
     }
     init();
   }
@@ -31,8 +33,9 @@
         return;
       }
 
-      PageService.createPage(vm.websiteId, page);
-      $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+      PageService.createPage(vm.websiteId, page).success(function() {
+        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+      });
     }
   }
 })();
@@ -51,18 +54,22 @@
     vm.deletePage = deletePage;
     
     function init() {
-      vm.page = PageService.findPageById(pageId);
+      PageService.findPageById(pageId).success(function(page) {
+        vm.page = page;
+      });
     }
     init();
 
     function updatePage(page) {
-      PageService.updatePage(pageId, page);
-      $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+      PageService.updatePage(pageId, page).success(function() {
+        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+      });
     }
 
     function deletePage() {
-      PageService.deletePage(pageId);
-      $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+      PageService.deletePage(pageId).success(function() {
+        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+      });
     }
   }
 })();

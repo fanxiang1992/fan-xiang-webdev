@@ -13,7 +13,6 @@
 </nav>
 
 <div class="container">
-  <form>
     <div class="form-group">
       <label for="pagename">Name</label>
       <input ng-model="model.widget.name" type="text" class="form-control" id="name" placeholder="Name">
@@ -39,6 +38,17 @@
           <label for="url">URL</label>
           <input ng-model="model.widget.url" type="text" class="form-control" id="url" placeholder="URL">
         </div>
+
+        <form action="/api/upload" method="post" enctype="multipart/form-data">
+          <input name="myFile" type="file" class="form-control"/>
+          <input name="width" value="{{model.widget.width}}" style="display: none"/>
+          <input name="widgetId" value="{{model.widget._id}}" style="display: none"/>
+          <input  name="userId" value="{{model.uid}}" style="display: none"/>
+          <input  name="websiteId" value="{{model.wid}}" style="display: none"/>
+          <input  name="pageId" value="{{model.pid}}" style="display: none"/>
+          <button type="submit" class="btn btn-block btn-primary">Upload Image</button>
+        </form>
+
       </div>
       <div ng-switch-when="YOUTUBE">
         <div class="form-group">
@@ -51,7 +61,6 @@
         </div>
       </div>
     </div>
-  </form>
   <a class="btn btn-danger btn-block"
   ng-click="model.deleteWidget()">Delete</a>
 </div>

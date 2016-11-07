@@ -12,22 +12,25 @@
     vm.deleteWidget = deleteWidget;
 
     function init() {
-      vm.widget = WidgetService.findWidgetById(vm.wgid);
+      WidgetService.findWidgetById(vm.wgid).success(function(widget) {
+        vm.widget = widget;
+      });
     }
     init();
 
     function updateWidget(widget) {
-      WidgetService.updateWidget(vm.sgid, widget);
-      $location.url("/user/" + vm.uid + "/website/" + vm.wid + 
+      WidgetService.updateWidget(vm.wgid, widget).success(function() {
+        $location.url("/user/" + vm.uid + "/website/" + vm.wid + 
         "/page/" + vm.pid + "/widget");
+      }); 
     }
 
     function deleteWidget() {
-      WidgetService.deleteWidget(vm.wgid);
-      $location.url("/user/" + vm.uid + "/website/" + vm.wid + 
+      WidgetService.deleteWidget(vm.wgid).success(function() {
+        $location.url("/user/" + vm.uid + "/website/" + vm.wid + 
         "/page/" + vm.pid + "/widget");
+      }); 
     }
-
   }
 })();
 
@@ -45,7 +48,9 @@
     vm.checkSafeYouTubeUrl = checkSafeYouTubeUrl;
 
     function init() {
-      vm.widgets = WidgetService.findWidgetsByPageId(vm.pid);
+      WidgetService.findWidgetsByPageId(vm.pid).success(function(widgets) {
+        vm.widgets = widgets;
+      });
     }
     init();
 
@@ -54,12 +59,19 @@
     }
 
     function checkSafeYouTubeUrl(url) {
-      console.log(url);
       var parts = url.split('/');
       var id = parts[parts.length - 1];
       url = "https://www.youtube.com/embed/"+id;
-      console.log(url);
       return $sce.trustAsResourceUrl(url);
+    }
+
+    function sortWidget(start, end) {
+      WidgetService.sortWidget(vm.pageId, start, end)
+      .then(function (response) {
+        vm.widgets = response.data;
+      }, function(error) {
+        vm.error = error.data;
+      })
     }
   }
 })();
@@ -79,7 +91,9 @@
     vm.createWidget = createWidget;
 
     function init() {
-      vm.widgets = WidgetService.findWidgetsByPageId(vm.pid);
+      WidgetService.findWidgetsByPageId(vm.pid).success(function(widgets) {
+        vm.widgets = widgets;
+      });
     }
     init();
 
@@ -91,16 +105,18 @@
       var parts = url.split('/');
       var id = parts[parts.length - 1];
       url = "https://www.youtube.com/embed/"+id;
-      console.log(url);
       return $sce.trustAsResourceUrl(url);
     }
 
     function createWidget(type) {
       widget = {};
       widget.widgetType = type;
-      wgid = WidgetService.createWidget(vm.pid, widget);
-      $location.url("/user/" + vm.uid + "/website/" + vm.wid + 
+      WidgetService.createWidget(vm.pid, widget).success(function(widget) {
+        wgid = widget._id;
+        $location.url("/user/" + vm.uid + "/website/" + vm.wid + 
         "/page/" + vm.pid + "/widget/" + wgid);
+      });
+      
     }
   }
 })();
