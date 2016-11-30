@@ -33,8 +33,8 @@
       return $http.get(url);
     }
 
-    function updateUser(userId, user) {
-      var url = '/api/user/'+userId;
+    function updateUser(user) {
+      var url = '/api/user/'+user._id;
       return $http.put(url, user);
 
     }

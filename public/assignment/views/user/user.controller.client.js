@@ -18,6 +18,7 @@
         if(user === '0') {
           vm.error = "No such user";
         } else {
+          console.log(user._id);
           $location.url("/user/" + user._id);
         }
       })
@@ -57,7 +58,7 @@
       UserService
       .createUser(user)
       .success(function(user){
-        $location.url("/user/"+user._id);
+        $location.url("/user/"+user.uid);
       })
       .error(function (error) {
 
@@ -72,7 +73,7 @@
 
   function ProfileController($routeParams, UserService) {
     var vm = this;
-    vm.userId = parseInt($routeParams.uid);
+    vm.userId = $routeParams.uid;
     vm.updateUser = updateUser;
     vm.unregisterUser = unregisterUser;
 

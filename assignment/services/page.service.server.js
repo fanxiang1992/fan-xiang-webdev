@@ -1,13 +1,12 @@
-module.exports = function (app) {
 
-  var pages = [
-    { "_id": 321, "name": "Post 1", "websiteId": 456, "description": "Lorem" },
-    { "_id": 432, "name": "Post 2", "websiteId": 456, "description": "Lorem" },
-    { "_id": 543, "name": "Post 3", "websiteId": 456, "description": "Lorem" }
-    ];
+
+module.exports = function (app,model) {
+
+
 
 
     app.post('/api/website/:websiteId/page', createPage);
+    app.get('/api/pages/allpages', allPages);    //why I change it to api/user/alluser doesn;t work
     app.get('/api/website/:websiteId/page', findAllPagesForWebsite);
     app.get('/api/page/:pageId', findPageById);
     app.put('/api/page/:pageId', updatePage);
@@ -15,59 +14,103 @@ module.exports = function (app) {
 
 
     function deletePage(req, res) {
-        var pid = parseInt(req.params.pageId);
-        for(var p in pages) {
-            if(pages[p]._id == pid) {
-                pages.splice(p,1);
-            }
-        }
-        res.send(200);
+        var pageId = req.params.pageId;
+        model
+            .pageModel
+            .deletePage(pageId)
+            .then(
+                function(status){
+                    res.sendStatus(200);
+                },
+                function(error){
+                    res.sendStatus(400).send(error);
+                }
+            );
     }
 
 
 
     function updatePage(req, res) {
-        var updatedpage = req.body;
-        var pid = parseInt(req.params.pageId);
-        for(var p in pages) {
-            if(pages[p]._id == pid) {
-                pages[p] = updatedpage;
-            }
-        }
-        res.send(200); 
+        var page = req.body;
+        var pageId = req.params.pageId;
+        model
+            .pageModel
+            .updatePage(pageId, page)
+            .then(
+                function(status){
+                    res.sendStatus(200);
+                },
+                function(error){
+                    res.sendStatus(400).send(error);
+                }
+            );
     }
 
 
     function createPage(req, res) {
         var page = req.body;
-        page._id = (new Date()).getTime();
-        pages.push(page);
-        res.send(page);
+        var wid = req.params.websiteId;
+        model
+            .pageModel
+            .createPage(wid, page)
+            .then(
+                function(newPage){
+                    res.send(newPage);
+
+                },
+                function(error){
+                    res.sendStatus(400).send(error);
+                }
+            );
     }
 
     //finid page by id
     function findPageById(req,res) {
-        var pid = parseInt(req.params.pageId);                     
-        for (var p in pages) {
-            if (pages[p]._id === pid) {
-                res.send(pages[p]);
-                return;
-            }
-        }
-        res.send('0');
+        var pageId = req.params.pageId;
+        model
+            .pageModel
+            .findPageById(pageId)
+            .then(
+                function(page){
+                    if(page){
+                        res.send(page);
+                    }
+                    else{
+                        res.send('0');
+                    }
+                },
+                function(error){
+                    res.sendStatus(400).send(error);
+                }
+            );
     }
 
 
     //findallPagesforwebsite
     function findAllPagesForWebsite(req, res) {
         var wid = req.params.websiteId;
-        var result = [];
-        for(var p in pages) {
-            if(pages[p].websiteId === parseInt(wid)) {
-                result.push(pages[p]);
-            }
-        }
-        res.send(result);
-        return;
+        model
+            .pageModel
+            .findAllPagesForWebsite(wid)
+            .then(
+                function(pages){
+                    if(pages){
+                        res.json(pages);
+                    }
+                    else{
+                        res.send('0');
+                    }
+                },
+                function(error){
+                    res.sendStatus(400).send(error);
+                }
+            );
+    }
+
+    //testing purpose
+    function allPages(req, res) {
+        res.send(pages);
+
+
     }
 }

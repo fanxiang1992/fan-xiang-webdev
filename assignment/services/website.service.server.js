@@ -1,71 +1,110 @@
-module.exports = function (app) {
-  var websites = [
-    { "_id": 123, "name": "Facebook",    "developerId": 456, "description": "Lorem" },
-    { "_id": 234, "name": "Tweeter",     "developerId": 456, "description": "Lorem" },
-    { "_id": 456, "name": "Gizmodo",     "developerId": 456, "description": "Lorem" },
-    { "_id": 567, "name": "Tic Tac Toe", "developerId": 123, "description": "Lorem" },
-    { "_id": 678, "name": "Checkers",    "developerId": 123, "description": "Lorem" },
-    { "_id": 789, "name": "Chess",       "developerId": 234, "description": "Lorem" }
-    ];
 
+
+module.exports = function (app, model) {
+
+    app.get('/api/webs/allwebs', allWebs);    //why I change it to api/user/alluser doesn;t work
     app.post('/api/user/:userId/website',createWebsite);
     app.get('/api/user/:userId/website', findWebsitesForUser);
     app.get('/api/website/:websiteId', findWebsiteById);
     app.put('/api/website/:websiteId', updateWebsite);
-    app.delete('/api/website/:websiteId', deleteWebsite);
+    app.delete('/api/website/:websiteId', removeWebsite);
 
-    function deleteWebsite(req, res) {
-        var wid = req.params.websiteId;
-        for(var w in websites) {
-            if(websites[w]._id == wid) {
-                websites.splice(w,1);
-            }
-        }
-        res.send(200);
-    }
-
-    function updateWebsite(req, res) {
-        var web = req.body;
-        var wid = parseInt(req.params.websiteId);
-        for(var w in websites) {
-            if(websites[w]._id == wid) {
-                websites[w] = web;
-            }
-        }
-        res.send(200); 
-    }
-
-    function findWebsiteById(req,res) {
-        var wid = req.params.websiteId;
-        for (var w in websites) {
-            if (websites[w]._id === parseInt(wid)) {
-                res.send(websites[w]);
-                return;
-            }
-        }
-        res.send('0');
-    }
-
-
-    function findWebsitesForUser(req, res) {
-        var uid = req.params.userId;
-        var result = [];
-        for(var w in websites) {
-            if(websites[w].developerId === parseInt(uid)) {
-                result.push(websites[w]);
-            }
-        }
-        res.send(result);
-        return;
-    }
 
 
     function createWebsite(req, res) {
         var website = req.body;
-        website._id = (new Date()).getTime();
-        websites.push(website);
-        res.send(website);
+        console.log(website);
+        var uid = req.params.userId;
+        console.log(req.params.userId);
+        model
+            .websiteModel
+            .createWebsiteForUser(uid, website)
+            .then(
+                function (newWebsite) {
+                console.log(newWebsite);
+                res.json(newWebsite);
+            })
     }
 
 
+    function removeWebsite(req, res) {
+        var wid = req.params.websiteId;
+        model
+            .websiteModel
+            .deleteWebsite(wid)
+            .then(
+                function (status) {
+                    res.sendStatus(200);
+                },
+                function (error) {
+                    res.sendStatus(400).send(error);
+                }
+            )
+    }
+
+
+
+    function updateWebsite(req, res) {
+        var website = req.body;
+        var wid = req.params.websiteId;
+        model
+            .websiteModel
+            .updateWebsite(wid, website)
+            .then(
+                function(status){
+                    res.sendStatus(200);
+                },
+                function(error){
+                    res.sendStatus(400).send(error);
+                }
+            );
+    }
+
+    function findWebsiteById(req,res) {
+        var wid = req.params.websiteId;
+        model
+            .websiteModel
+            .findWebsiteById(wid)
+            .then(
+                function(website){
+                    if(website){
+                        res.send(website);
+                    }
+                    else{
+                        res.send('0');
+                    }
+                },
+                function(error){
+                    res.sendStatus(400).send(error);
+                }
+            );
+
+    }
+
+
+    function findWebsitesForUser(req, res) {
+        model
+            .websiteModel
+            .findWebsitesForUser(req.params.userId)
+            .then(
+                function (websites) {
+                    if(websites){
+                        res.json(websites);
+                    }
+                    else{
+                        res.send('0');
+                    }
+                },
+                function(error){
+                    res.sendStatus(400).send(error);
+                }
+            );
+
+    }
+
+    //testing purpose
+    function allWebs(req, res) {
+        res.send(websites);
+
+    }
 }
