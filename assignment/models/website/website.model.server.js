@@ -15,27 +15,24 @@ module.exports = function() {
 
 
     function updateWebsite(websiteId,website) {
-        console.log("----------------updateWebsite------------------")
-        return WebsiteModel
-            .update(
-                {
-                    _id: websiteId
-                },
-                {
-                    name: website.name,
-                    description: website.description
-                }
-            );
+      return WebsiteModel
+      .update(
+      {
+        _id: websiteId
+      },
+      {
+        name: website.name,
+        description: website.description
+      }
+      );
     }
 
     function findWebsiteById(websiteId) {
-        console.log("----------------FindWebsiteById------------------")
         return WebsiteModel
             .findById(websiteId);
     }
 
     function deleteWebsite(websiteId) {
-        console.log("----------------deleteWebsite------------------")
         return WebsiteModel
             .remove({
                 _id:websiteId
@@ -43,7 +40,6 @@ module.exports = function() {
     };
 
     function findWebsitesForUser(userId) {
-        console.log("----------------findWebsitesForUser------------------")
         return WebsiteModel
             .find({
                 _user: userId
@@ -51,7 +47,6 @@ module.exports = function() {
     }
 
     function createWebsiteForUser(userId,website) {
-        console.log("----------------createWebsiteForUser------------------")
         website["_user"] = userId;
         return WebsiteModel.create(website);
     }

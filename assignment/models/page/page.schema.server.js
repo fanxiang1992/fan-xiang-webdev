@@ -1,5 +1,4 @@
 
-
 module.exports = function(){
     var mongoose = require("mongoose");
     var widgetSchema = require("../widget/widget.schema.server.js")(mongoose);
@@ -13,7 +12,8 @@ module.exports = function(){
         title: String,
         description: String,
         widgets: [widgetSchema],
-    }, {collection: "page"});
+    }, 
+    {collection: "page"});
 
     return PageSchema;
 };

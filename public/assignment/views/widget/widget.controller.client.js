@@ -26,6 +26,7 @@
     }
 
     function deleteWidget() {
+      console.log("client delete");
       WidgetService.deleteWidget(vm.wgid).success(function() {
         $location.url("/user/" + vm.uid + "/website/" + vm.wid + 
         "/page/" + vm.pid + "/widget");

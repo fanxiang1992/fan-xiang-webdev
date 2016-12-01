@@ -1,6 +1,8 @@
 module.exports = function() {
 
-    var connectionString = 'mongodb://localhost/fanxiang';
+    
+
+    var connectionString = 'mongodb://localhost/fan-xiang-webdev';
     if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
         connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
             process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
@@ -8,8 +10,10 @@ module.exports = function() {
             process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
             process.env.OPENSHIFT_APP_NAME;
     }
+
     var mongoose = require('mongoose');
     mongoose.connect(connectionString);
+    
 
 
     var userModel = require("./user/user.model.server.js")();

@@ -26,7 +26,7 @@ module.exports = function (app) {
 
     function updateWebsite(req, res) {
         var web = req.body;
-        var wid = parseInt(req.params.websiteId);
+        var wid = req.params.websiteId;
         for(var w in websites) {
             if(websites[w]._id == wid) {
                 websites[w] = web;
@@ -38,7 +38,7 @@ module.exports = function (app) {
     function findWebsiteById(req,res) {
         var wid = req.params.websiteId;
         for (var w in websites) {
-            if (websites[w]._id === parseInt(wid)) {
+            if (websites[w]._id == wid) {
                 res.send(websites[w]);
                 return;
             }
@@ -51,7 +51,7 @@ module.exports = function (app) {
         var uid = req.params.userId;
         var result = [];
         for(var w in websites) {
-            if(websites[w].developerId === parseInt(uid)) {
+            if(websites[w].developerId == uid) {
                 result.push(websites[w]);
             }
         }

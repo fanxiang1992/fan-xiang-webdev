@@ -27,7 +27,9 @@ module.exports = function(){
         priority: Number,
         isType: Boolean,
         typeName: String,
-    }, {collection: "widget"});
+        dateCreated: Date,
+    }, 
+    {collection: "widget"});
 
     return WidgetSchema;
 };

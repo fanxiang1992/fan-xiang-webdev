@@ -11,6 +11,7 @@ module.exports = function () {
         name: String,
         description: String,
         pages: [pageSchema],
-    }, {collection: "website"});
+    },
+      {collection: "website"});
     return WebsiteSchema;
 }

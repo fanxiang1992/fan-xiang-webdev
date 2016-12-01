@@ -13,16 +13,21 @@ module.exports = function() {
     };
     return api;
 
-    function deletePage(pageId) {
-        console.log("----------------deletePage---------------------")
-        return PageModel
-            .remove({
-                _id: pageId
-            })
+    function createPage(websiteId, page){
+        page["_website"] = websiteId;
+        return PageModel.create(page);
     }
 
+    function findAllPagesForWebsite(websiteId){
+        return PageModel
+            .find({
+                _website: websiteId
+            });
+    }
+
+    
+
     function updatePage(pageId, page) {
-        console.log("----------------updatePage---------------------")
         return PageModel
             .update(
                 {
@@ -36,25 +41,20 @@ module.exports = function() {
             );
     }
 
-    function findPageById(pageId) {
-        console.log("----------------findPageById---------------------")
+    function deletePage(pageId) {
         return PageModel
-            .findById(pageId);
-    }
-
-
-    function findAllPagesForWebsite(websiteId){
-        console.log("----------------findAllPagesForWebsite---------------------")
-        return PageModel
-            .find({
-                _website: websiteId
+            .remove({
+                _id: pageId
             });
     }
 
-    function createPage(websiteId, page){
-        console.log("----------------createPage---------------------")
-        page["_website"] = websiteId;
-        return PageModel.create(page);
+    function findPageById(pageId) {
+        return PageModel.findById(pageId);
     }
+
+
+    
+
+    
 
 }

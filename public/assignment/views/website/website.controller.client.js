@@ -22,7 +22,7 @@
 
   function WebsiteEditController($routeParams, WebsiteService, $route, $location) {
     var vm = this;
-    vm.websiteId = parseInt($routeParams.wid);
+    vm.websiteId = $routeParams.wid;
     vm.userId = $routeParams.uid;
     vm.updateWebsite = updateWebsite;
     vm.deleteWebsite = deleteWebsite;

@@ -11,24 +11,21 @@ module.exports = function() {
         getAllUser: getAllUser,
         findUserByCredentials:findUserByCredentials,
         removeUser:removeUser,
-        findUserByUsername:findUserByUsername,
+        findUserByUsername:findUserByUsername
     }
     return api;
 
 
     function findUserByUsername(username) {
-        console.log("--------------------findUserByUsername-----------------------------")
         return UserModel.findOne({username: username});
     }
 
     function removeUser(userId) {
-        console.log("--------------------removeUser-----------------------------")
         return UserModel
             .remove({_id: userId});
     }
 
     function findUserByCredentials(username, password) {
-        console.log("-------------findUserByCredentials------------------")
         return UserModel.findOne({
             username: username,
             password: password
@@ -36,17 +33,17 @@ module.exports = function() {
     }
 
     function updateUser(userId, user) {
-        return UserModel
-            .update(
-                {
-                    _id:userId
-                },
-                {
-                    firstname: user.firstname,
-                    lastname: user.lastname,
-                    email: user.email
-                }
-            );
+      return UserModel
+      .update(
+      {
+        _id:userId
+      },
+      {
+        firstName:user.firstName,
+        lastName: user.lastName,
+        email: user.email
+      }
+      );
     }
 
     function findUserById(userId) {
