@@ -29,7 +29,7 @@
 
     function createPage(page) {
       if(!page || !page.name || !page.description) {
-        vm.error = "Page name or description can't be empty";
+        vm.error = "Page name or title can't be empty";
         return;
       }
 
@@ -61,6 +61,10 @@
     init();
 
     function updatePage(page) {
+      if(!page || !page.name || !page.description) {
+        vm.error = "Page name or title can't be empty";
+        return;
+      }
       PageService.updatePage(pageId, page).success(function() {
         $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
       });

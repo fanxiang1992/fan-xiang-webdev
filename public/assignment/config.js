@@ -1,6 +1,21 @@
 (function() {
   angular.module("WebAppMaker").config(Config);
 
+  var checkLoggedin = function($q, $timeout, $http, $location, $rootScope) {
+    var deferred = $q.defer();
+    $http.get('/api/loggedin').success(function(user) {
+      $rootScope.errorMessage = null;
+      if (user !== '0') {
+        $rootScope.currentUser = user;
+        deferred.resolve();
+      } else {
+        deferred.reject();
+        $location.url('/');
+      }
+    });
+    return deferred.promise;
+  };
+
   function Config($routeProvider) {
     $routeProvider
     .when("/home", {
@@ -16,10 +31,17 @@
       controller: "RegisterController",
       controllerAs: "model"
     })
+    .when("/user", {
+      templateUrl: "views/user/profile.view.client.html",
+      controller: "ProfileController",
+      controllerAs: "model",
+      resolve: { loggedin: checkLoggedin }
+    })
     .when("/user/:uid", {
       templateUrl: "views/user/profile.view.client.html",
       controller: "ProfileController",
-      controllerAs: "model"
+      controllerAs: "model",
+      resolve: { loggedin: checkLoggedin }
     })
     .when("/user/:uid/website", {
       templateUrl: "views/website/website-list.view.client.html",

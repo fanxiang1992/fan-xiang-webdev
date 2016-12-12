@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();
-
+require('dotenv').config();
 // app.set('port', (process.env.PORT || 5000));
 
 // app.use(express.static(__dirname + '/public'));
@@ -16,8 +16,27 @@ var app = express();
 // app.listen(app.get('port'), function() {
 //   console.log('Node app is running on port', app.get('port'));
 // });
+var passport = require('passport');
+var cookieParser = require('cookie-parser');
+var session      = require('express-session');
 
 var bodyParser = require('body-parser');
+
+
+// app.use(session({ secret: process.env.SESSION_SECRET }));
+app.use(session({
+    secret: 'this is the secret',
+    resave: true,
+    saveUninitialized: true
+}));
+
+
+
+
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('port', (process.env.PORT || 3000));

@@ -39,7 +39,12 @@
     init();
 
     function updateWebsite(website) {
+      if(!website || !website.name) {
+        vm.error = "Website name can't be empty";
+        return;
+      }
       WebsiteService.updateWebsite(vm.websiteId, website).success(function() {
+
         $location.url("/user/" + vm.userId + "/website");
       });
     }

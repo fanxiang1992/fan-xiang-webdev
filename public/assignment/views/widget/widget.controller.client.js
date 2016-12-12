@@ -19,6 +19,10 @@
     init();
 
     function updateWidget(widget) {
+      if(!widget || !widget.name) {
+        vm.error = "Widget name can't be empty";
+        return;
+      }
       WidgetService.updateWidget(vm.wgid, widget).success(function() {
         $location.url("/user/" + vm.uid + "/website/" + vm.wid + 
         "/page/" + vm.pid + "/widget");
