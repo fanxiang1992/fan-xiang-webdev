@@ -2,29 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Web Dev Course Home Page</title>
+    <title>WebDev Course Home Page</title>
+    <link href="../vendor/css/bootstrap.css" rel="stylesheet"/>
+    <link href="assignment/css/style.css" rel="stylesheet"/>
+
 </head>
-<body>
-    <h1>Web Dev Course Home Page</h1>
+<body class="home-body">
 
-    <p>
-        Customize this home page to your linking.
-    </p>
+<div class="image-background">
+<!-- <img src="images/home.JPG" width="100%"/> -->
+<div class="image-text">
+  <h1>Web Dev Course Home Page</h1>
+  <div class="intro">
+    Hello, welcome to Xiang's homepage! My name is Xiang Fan and I'm a senior Computer Science major student from Northeastern
+    University. I'm a full stack developer and I'm also interested in automation testing, I believe that anything you've manually tested
+    twice should be automated.
+  </div>
+</div>
+</div>
 
-    <h2>Required links</h2>
-    <ul>
-        <li>
-            <a href="project/index.html">Project</a>
-        </li>
-        <li>
-            <a href="assignment/">Assignment</a>
-        </li>
-        <li>
-            <a href="test/index.html">Test MongoDB</a>
-        </li>
-        <li>
-            <a href="https://github.com/fanxiang1992/fan-xiang-webdev" target="_blank">Your public repository at GitHub.com</a>
-        </li>
-    </ul>
+<div class="links col-xs-12">
+  <div class="link-red col-xs-12 col-md-3">
+    <div class="link-child">
+      <a class="link-name" href="project/index.html">Assignment</a>
+      <p>CS5610 WebDev Assignments</p>
+      <a class="btn btn-default btn-assignment"  href="assignment/#/home">
+    Assignment
+      </a>
+    </div>
+
+  </div>
+
+  <div class="link-blue col-xs-12 col-md-3">
+    <div class="link-child">
+      <img src=>
+      <a class="link-name" href="project/index.html">Project</a>
+      <p>Final project for CS5610, it's a web application for online school, it's designed for course catalog, course registration and gradebook</p>
+      <a class="btn btn-default btn-project">
+    Project
+      </a>
+    </div>
+  </div>
+  <div class="link-yellow col-xs-12 col-md-3">
+    <div class="link-child">
+      <a class="link-name" href="test/index.html">Video</a>
+      <p>Demo vedieo for final project</p>
+      <a class="btn btn-default btn-video" ng-click="model.login(model.user)">
+    Video
+      </a>
+    </div>
+  </div>
+  <div class="link-green col-xs-12 col-md-3">
+    <div class="link-child">
+      <a class="link-name" href="https://github.com/fanxiang1992/fan-xiang-webdev" target="_blank">Github</a>
+      <p>Link to my WebDev repository, all source codes are available</p>
+      <a class="btn btn-default btn-github" href="https://github.com/fanxiang1992/fan-xiang-webdev"">
+    Github
+      </a>
+    </div>
+  </div>
+</div>
+
+
 </body>
 </html>

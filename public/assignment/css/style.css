@@ -5,6 +5,103 @@ input.form-control {
 body {
     padding-top: 60px;
 }
+body.home-body {
+  padding:0;
+
+}
+
+.image-background {
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.5)
+    ),
+    url('../../images/home.JPG');
+  background-size: cover;
+  height: 500px;
+  position: relative;
+}
+
+.image-text {
+  position: absolute;
+  color: white;
+  top: 5rem;
+  left: 5rem;
+  max-width:45%;
+}
+
+.image-text .intro {
+  padding-top: 5rem;
+  font-size: 2rem;
+}
+
+.links {
+  text-align: center;
+  margin-top: 4rem;
+  margin-bottom: 8rem;
+}
+
+.link-child {
+  margin: 0 0.5rem;
+  border: 1.5px solid #ddd;
+  border-radius:5px;
+  height: 200px;
+}
+
+.link-child a.link-name {
+  font-size: 2rem;
+  position: relative;
+  top: -1.5rem;
+  background: #fff;
+  padding: 0 1rem;
+}
+
+.link-child a.link-name:hover {
+  text-decoration: none;
+}
+
+.link-child p {
+  padding: 1rem 2rem;
+}
+
+.link-child .btn {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  width: 150px;
+  transform: translateX(-50%);
+}
+
+.link-red .link-name {
+  color: #ef4836;
+}
+.link-red .btn {
+  background: #ef4836;
+  color: white;
+}
+
+.link-blue .link-name {
+  color: #52b3d9;
+}
+.link-blue .btn {
+  background: #52b3d9;
+  color: white;
+}
+
+.link-green .link-name {
+  color: #3fc380;
+}
+.link-green .btn {
+  background: #3fc380;
+  color: white;
+}
+
+.link-yellow .link-name {
+  color: #f89406;
+}
+.link-yellow .btn {
+  background: #f89406;
+  color: white;
+}
 
 .navbar-plus {
 	font-size: 24px;
