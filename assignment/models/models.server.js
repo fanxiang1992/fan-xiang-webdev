@@ -2,14 +2,8 @@ module.exports = function() {
 
     
 
-    var connectionString = 'mongodb://localhost/fan-xiang-webdev';
-    if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
-        connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
-            process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
-            process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
-            process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
-            process.env.OPENSHIFT_APP_NAME;
-    }
+    var connectionString = 'mongodb://heroku_lwvk20zz:telf50blhci9bp5vti2voqv3pn@ds063536.mlab.com:63536/heroku_lwvk20zz';
+
 
     var mongoose = require('mongoose');
     mongoose.connect(connectionString);
